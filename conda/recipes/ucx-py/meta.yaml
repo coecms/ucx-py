@@ -26,19 +26,20 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - ucx==1.15.0
   host:
     - python
     - pip
-    - ucx
+    - ucx==1.15.0
     {% for r in data.get("build-system", {}).get("requires", []) %}
     - {{ r }}
     {% endfor %}
   run:
     - python
-    - ucx >=1.14.1,<1.16.0
     {% for r in data.get("project", {}).get("dependencies", []) %}
     - {{ r }}
     {% endfor %}
+    - ucx==1.15.0
 
 test:
   imports:
