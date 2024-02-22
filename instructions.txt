@@ -1,0 +1,21 @@
+rm .conda
+mkdir -p $PBS_JOBFS/.conda
+ln -s !$
+###
+cd ~/cms-conda-singularity/scripts
+export CONDA_ENVIRONMENT=analysis3
+source dev_prep.sh
+launch
+### In container
+source /g/data/hh5/public/apps/cms_conda/etc/profile.d/conda.sh
+conda activate analysis3-unstable
+cd ~/ucx-py
+cd conda
+cd recipes
+cd ucx-py
+export CONDA_PY='3.10'
+export RAPIDS_PACKAGE_VERSION=v0.36.00
+export RAPIDS_CUDA_VERSION=12.3.107 ### Match to version in conda env
+export RAPIDS_DATE_STRING=$( date +%Y%m%d )
+export CONDA_BLD_PATH=~/conda-bld
+conda build . -c conda-forge

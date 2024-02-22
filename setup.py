@@ -15,7 +15,7 @@ from setuptools.extension import Extension
 include_dirs = [os.path.dirname(get_python_inc())]
 library_dirs = [get_config_var("LIBDIR")]
 libraries = ["ucp", "uct", "ucm", "ucs"]
-extra_compile_args = ["-std=c99", "-Werror"]
+extra_compile_args = ["-std=c99", "-Werror", "-Wno-error=address"]
 
 
 ext_modules = [
